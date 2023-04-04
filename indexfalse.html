@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Reverso Context</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta content="NOARCHIVE" name="GOOGLEBOT">
+    <link rel="shortcut icon" href="https://cdn.reverso.net/context/v4010/reverso-context-fav.ico" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.reverso.net/context/v4010/css/bst.style.css"/>
+    <style>
+      @font-face{font-family:'contexticons';src:url('https://cdn.reverso.net/context/v4010/fonts/contexticons.eot?uk2hvl');src:url('https://cdn.reverso.net/context/v4010/fonts/contexticons.eot?uk2hvl#iefix') format('embedded-opentype'),url('https://cdn.reverso.net/context/v4010/fonts/contexticons.ttf?uk2hvl') format('truetype'),url('https://cdn.reverso.net/context/v4010/fonts/contexticons.woff?uk2hvl') format('woff'),url('https://cdn.reverso.net/context/v4010/fonts/contexticons.svg?uk2hvl#contexticons') format('svg');font-weight: normal;font-style: normal;}
+      #error-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10vh 30px;
+        box-sizing: border-box;
+        margin: 0;
+        overflow: hidden;
+      }
+      #error-content .text {
+        height: auto;
+        box-sizing: border-box;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper" class="error">
+      <section id="top-content">
+        <a class="reverso-logo nonselectable" href="/" title="Reverso Context: the search engine for translations in context">
+          <div class="logo">
+            <span class="icon reverso-logo-red"></span>
+            <span class="icon reverso-logo-blue"></span>
+          </div>
+          <div class="text">
+            <span class="icon reverso-text"></span>
+            <span class="icon context-text"></span>
+          </div>
+        </a>
+        <div class="reverso-links">
+          <a class="translation-link" target="_blank" href="http://www.reverso.net/text_translation.aspx?lang=EN">
+            Translation
+          </a>
+          <a class="dictionary-link" target="_blank" href="http://dictionary.reverso.net">
+            Dictionary
+          </a>
+          <a class="speller-link" target="_blank" href="http://www.reverso.net/spell-checker/english-spelling-grammar/">
+            Spell Check
+          </a>
+          <a class="conjugation-link" target="_blank" href="http://conjugator.reverso.net">
+            Conjugator
+          </a>
+          <a class="grammar-link last" target="_blank" href="http://grammar.reverso.net/">
+            Grammar
+          </a>
+        </div>
+      </section>
+      <section id="error-content">
+        <p id="text-en" class="text" style="display: none">
+          You've been denied access â IP blacklisted<br>
+          Your IP <b class="ip"></b> has been considered as sending illegitimate traffic to our servers.<br>
+          If you think your traffic is legitimate, please fill in the form below so we could investigate why you were blacklisted.<br><br>
+          Thank you,<br>
+          The Reverso Team
+        </p>
+        <p id="text-fr" class="text" style="display: none">
+          Votre accÃ¨s a Ã©tÃ© bloquÃ©<br>
+          Nous avons dÃ©tectÃ© que votre adresse IP <b class="ip"></b> utilise notre service de maniÃ¨re non-conforme.<br>
+          Si vous pensez qu'il s'agit d'une erreur, merci de remplir le formulaire de contact ci-dessous et nous reviendrons vers vous rapidement.<br><br>
+          Cordialement,<br>
+          L'Ã©quipe Reverso
+        </p>
+        <iframe id="iframe-form" width="1000" height="3000" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0">Loading...</iframe>
+        <script type="text/javascript">
+          var userLang = navigator.language || navigator.userLanguage;
+          var referrer = encodeURIComponent(document.domain || document.location);
+          var error_type = "General purpose blacklist";
+          var ip = "";
+          
+          if (userLang) {
+            var code = userLang.slice(0,2);
+            switch(code) {
+              case "fr":
+                document.getElementById("text-fr").style.display = "inline-block";
+                break;
+              case "en":
+              default:
+                document.getElementById("text-en").style.display = "inline-block";
+            }
+          }
+          
+          function getIP(json) {
+            ip = json.ip;
+            var ip_array = document.getElementsByClassName("ip");
+            for(var i in ip_array) {
+              ip_array[i].innerHTML = ip;
+            }
+            if (userLang) {
+              var code = userLang.slice(0,2);
+              switch(code) {
+                case "fr":
+                  document.getElementById("text-fr").style.display = "inline-block";
+                  document.getElementById("iframe-form").src = "https://docs.google.com/forms/d/e/1FAIpQLSc1OHspxMBUkn3JIBWZ7x6_7OUhyhDYpw94ZoYBFslKeCEB6g/viewform?usp=pp_url&entry.2007143517=" + referrer + "&entry.995552299&entry.493914488=" + ip + "&entry.915325004&entry.1470696955=" + error_type;
+                  break;
+                case "en":
+                default:
+                  document.getElementById("text-en").style.display = "inline-block";
+                  document.getElementById("iframe-form").src = "https://docs.google.com/forms/d/e/1FAIpQLSfMBhGzhLBDgL5KAValyjXJT4M3OB_ERtmIfsxQ6drIZ5Zwqg/viewform?usp=pp_url&entry.2007143517=" + referrer + "&entry.995552299&entry.493914488=" + ip + "&entry.915325004&entry.1470696955=" + error_type;
+              }
+            }
+          }
+          
+          document.getElementById("iframe-form").width = window.innerWidth > 300 ? window.innerWidth.toString() : "300";
+        </script>
+        <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+      </section>
+      <p class="developers">Developed by Prompsit Language Engineering for Softissimo</p>
+      <section id="footer">
+        <p class="copy">Â© 2017 Softissimo Inc. All rights reserved.</p>
+      </section>
+    </div>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Just a moment...</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="/cdn-cgi/styles/challenges.css" rel="stylesheet">
+    
+
+</head>
+<body class="no-js">
+    <div class="main-wrapper" role="main">
+    <div class="main-content">
+        <h1 class="zone-name-title h1">
+            <img class="heading-favicon" src="/favicon.ico"
+                 onerror="this.onerror=null;this.parentNode.removeChild(this)">
+            www.babla.ru
+        </h1>
+        <h2 class="h2" id="challenge-running">
+            Checking if the site connection is secure
+        </h2>
+        <noscript>
+            <div id="challenge-error-title">
+                <div class="h2">
+                    <span class="icon-wrapper">
+                        <div class="heading-icon warning-icon"></div>
+                    </span>
+                    <span id="challenge-error-text">
+                        Enable JavaScript and cookies to continue
+                    </span>
+                </div>
+            </div>
+        </noscript>
+        <div id="trk_jschal_js" style="display:none;background-image:url('/cdn-cgi/images/trace/managed/nojs/transparent.gif?ray=77c218f32826903a')"></div>
+        <div id="challenge-body-text" class="core-msg spacer">
+            www.babla.ru needs to review the security of your connection before proceeding.
+        </div>
+        <form id="challenge-form" action="/%D0%B0%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9/false?__cf_chl_f_tk=Yxt4WFbSZXDmX.Ql.wzou_6bAsj9AAw4iLMVD.xfRhA-1671473452-0-gaNycGzNBz0" method="POST" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="md" value="_j94XIXYrfFJZluJyV4D4bVggiCpr.PYxfVDnuR3Cqc-1671473452-0-AT3Ipb-RLqBKUAv8g8r9FbnjTgelhwv8FP_472MEqENafIZol0PaVyBx6IrzETa4TQeG_BqMLzb_9j_FWDttbN3qQC_d8aPEryyBu-mit79ez7gxUXebD52iZeOXAyrkkCdNYD9s0AqHMHgz8UdJwMydwNDrvfrgZdvg5Ir6yKXyywxgbKBxJxvz8MMG_Bc5fsvirOrZGv2D_wnDPaiXY3O8pxAubvOuRIJA4JGV0dxLyGC8yQz1uIWxTzm0EhCGHgRe-_BmNSgP34elpwWgsirDnEtXKeGjYyQMxH2cd5o6crqa2Yd3lo0liCDf9NrhjKck___AckzUHydpMMtD5_DrcNXSFd06grP52CwuQdfg59isERRBdCjfQcu_gnuwmVZgdhg_ncqXgFHuynwQCV8IxvOGEX8fZb4dt4pYxSvVKqa-5eCKB3ltReDgwK7SQZDHQ7kQmLFHpOcGEgyuVfmfV6OOvUv6XuPMBlyUzRxK1eY3AdhGpya1rHUz1001_n3klb0I8sikQWl13Yr3PRlAkBLt9FPNMoPgzEnMSFQbaf2OkaUfrSe45RoFhhsP6Ws3zB8bIhx2ZsQVHuR8YMniZP9181LsXUY-D8tSmyYXBGHHOgMmwXeRDlatpTjfRJe0f778zdNFXho2XWO-Gn5tmhPNQZZaj_viyiRFDVe6en9ljciD3L95G662YtazUlRtQEL_ohpu-Ay-AtqdhitBFKDQH2aVXR598_Mz4TZSlmvWIhdV1GD7ZDCF0KjC13gC2HhW5P9vK6iNofSq0VFVMc-vYgq_guZ2G9tgY0zROWqyGf7djXn5S8cXuMUAZ26uSwpd8FRbNPho6FNetfg96KWf7iW7O8LNLvxYXJN9Uhk198klp2P49LoVvUv7kkH-Y4lqahSWmWQJgGb5SuzPinOTiaCoYNM0MtIVXraHuHK3W20PMkLSmZQ8MD6RoBMaHvS8sKkli-kIweSRXc5husDMBSN68BOW0-zFEZNO">
+            <input type="hidden" name="r" value="HZNkOOU2GZ5bglo4X.zaXlmLOKEEF2NX9USsAsPVSd8-1671473452-0-AVCX60FZw4xdZrfNuk6Go+3owfdIVLaQC5rlcIpe7CHpKWLd+3zynkv/XkbTqb8U2FR2sZrPpS0ka2VUm+yqpqLMB7grQqQw0zw6EMAongL7yoe+pRBiKJQgVYkMj5jJ+txD2AEflfV3Fm5mOdpOshYbEo83nqvca1sVYaXQjfpu99yxGIyT+avROe6SBmnLT8R3rokmTwmWyGqHNaKgqg8Q6mkEJXy1brQyVa9gXjGKfinAiukuVhatxlgiNbWBhrZdv8RYDIJgMyF2pDLwMZtPFrKKUXxeLBNGPmbBz1+DacORQCwMkxisWA284kjzLQzS+q5fJavXCbbki2lmExj4Ve27SYC3gDXJf6N2uXYlzn/hmFOy5uhFSynv6ENAayGhv75VLJa3vSG42QgqQh+6Mz8mkaAleukTIU6tYO0jpx2qC7K4ZND8RkCYa2s94fcPGDvFVqLc9j3Nva1AHeM8PUwnsv30MuXlhoAqORsDKz7Q+Zz38WGuEnYBr91pJb9Z/VySJ6f+PCp3+HUdA14kytaSoPkmRdfNxkkiyjFDSRMVzqkRdLxRke2xjfYPlaq7GdJFqKAP/XC2ChaV9621ae2J1QYh1MjAqJMwDXyywI9hQDu0Dhu0OP60fxzCmxOOyT03iUc7fX9Y0HoG6jUeSHWlv/hKMoxuYMMoCSQOE6c6E4//BSxtMGJLQfUEEWoInrRnepq6IaF5OJATtAnXpGrbpHOPHYOQq8vW5FH8+TTYYyGikjuSm6zYmJpN0RD9gCkdFSSWKHIdrChGLLGRHf012xmETzKCv4QUM+4VJ7a4S3eyvft6PeT8loHQVNXDNQ25x9CStALigIcV8IWdCVUblcLnA91i4TcTpr0Bieh7w8ZGZX+KaZNsozLooGH4zdsYUQ4XNDAEkyuIPdup+cPw7M6i5XPARbER731KieAo51kHdKytxNIcuEBNw7Y0DxzjMbenWkrV50leWqiLsHxCORYWh3C30vtjW2gSVrbWGTsfCA5re7s5k2e7mkWyW7B4nKaxrzJGpkr0rWZQN1gjaOHj3IjCfysLwWw7223DjxNLIefk8r1Lp1Op9r90MwYhk/TcILj0N5/Kj6HpgiMhK9aj1RxwUMlbzYvrdWq3zE0wcnyimP2NRMLXTexoHYSKI3omJUgmeJn35NX/F4ksxfYBbYo7+1z7X27yUcIn9eqDPv39dEX3Pe0qOFLXDzgCD0i+p4skvc3gWOvM4Rtnlkhh/Y9sUW4gWwLYNzk6XxnNQ8mKjetmW/h+RJKqfcCWbyskfjzMRS7pc6gpEWyQOp04NJ2R2s2vD7u4nNOl5243rVQQaXhEE9Dchl926OKHBvlgwJd/5opcRRswFSukfWtDILOh7tx9OMMK5CmUiEYXk0D0QNypzmpZlqL3DM3/j0JBMeThWrE+/5QuI3d6p0MKWw2oSPOLvHbHdSQ3iRK3jtMSbof+npchGIeDXuhRWkA7mLW+claUAnt9kLSokCRAw5ga3GJzXQGDO8bnar8yD+DSYEXhdOGrs4RwNP8G+z+H2t45oyAzP3ldPaoRt2Gp1ZupIDXYHclEz+L+F+fR1x9dOCj+UdV1yej+8HOPag+dD4MQPaVhQNVW3g/gHJmH107VRy8wuFXRzp/a0pIyYba5IgwCrvSKoYcElPYMplk5yF1V+OG4MBRPcTW00wp7WfYdhko/H2zmwuIfX+8+z3RhgTXzoCs6nI/edmTEUoa8jJLcigOlO33aNUWTDsbdV2bXrG2OiNLRV7QMFPL/5qSoAF1c6KBh+w==">
+        </form>
+    </div>
+</div>
+<script>
+    (function(){
+        window._cf_chl_opt={
+            cvId: '2',
+            cType: 'managed',
+            cNounce: '87388',
+            cRay: '77c218f32826903a',
+            cHash: 'aba3ff398b80457',
+            cUPMDTk: "\/%D0%B0%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9\/false?__cf_chl_tk=Yxt4WFbSZXDmX.Ql.wzou_6bAsj9AAw4iLMVD.xfRhA-1671473452-0-gaNycGzNBz0",
+            cFPWv: 'g',
+            cTTimeMs: '1000',
+            cTplV: 4,
+            cTplB: 'cf',
+            cRq: {
+                ru: 'aHR0cHM6Ly93d3cuYmFibGEucnUvJUQwJUIwJUQwJUJEJUQwJUIzJUQwJUJCJUQwJUI4JUQwJUI5JUQxJTgxJUQwJUJBJUQwJUI4JUQwJUI5LSVEMSU4MCVEMSU4MyVEMSU4MSVEMSU4MSVEMCVCQSVEMCVCOCVEMCVCOS9mYWxzZQ==',
+                ra: 'cHl0aG9uLXJlcXVlc3RzLzIuMjUuMQ==',
+                rm: 'R0VU',
+                d: 'qTHkj0fm4OEwDlzbXqulFv2r4CJYbgYX2g7/iFkOi+DcC8YRaDy6jPgYPPBji75G0iGxUQr/hAoN8WbAjnliOWQBmCQtAfPtQTJ/EaJmuigjdGstxf8vqROfsbrokHPZA+E8R+ds/gDu8D9p15rTF/NNJlguxZkFGFVK4jjRhiCNtK5zWFkDulqwXjyqqVYpk//61mO4+o5rI8rIZAR446ffh+rmfxmQecM1pzatZ/h3C49O9OyNNZN1FWPZsWMh7RL/iZ3ceb1oEqrOgZiSgG5sXqq36w3QIUdalIjbbeqr++BMWrVDD8QNqHkMNKIacyye6yA0+2Ngxngg/rCRk7WRijt35IPYzVXg5qzv7nJpuJeeg46M9D30SXW8YpLHNrY0bXhM4p3wtv8q1oWjmNW0QzH0d90euPaJQOv5klxkXmgO3pzU+UxE3/9KUE1g2BdM5SfofQ83tUjWrNtHj5LAJzdAvqKYRGoBikyZbqIZpymPZngd+g+qJxwj3hHa0nSpt10JH6DUdWOrRwkxREbU5iDSEZo2Oa8ZwctO+MUsjw7H6Jd2+W9pe4ve8PcOftrbpTOFN9oniLs9qCKSpdieEV2oOgbM8SAjySHbpkvZkHAbug7pW+61Yvoj26EjmA9GSxOepVMhQxK+aPLUsWM2iDFeoX81M4z4vGLYVrW28M2VL7fevrMEkhnnENkG',
+                t: 'MTY3MTQ3MzQ1Mi4wOTYwMDA=',
+                m: 'Qf2AzLbTr6lRhF9dfNTCC32sr6wCuk+CODo+Pmtmb58=',
+                i1: 'OZihFVZVTlrjHjT/u+ja7g==',
+                i2: 'u3s0TZdth6JOXT6XRJf5Hw==',
+                zh: 'EvUXdB6I8dh0h0oBYhEayTFsJx5mz0Zl5ou1TaMGu8I=',
+                uh: '5GU+jYv2xJ+bCaE/ARmi/DORbiS/v56CW7E0TH4XWQk=',
+                hh: 'ZeniGxijZjtyOC+ReJ9UzMckMymxR9XxQJH749/TurE=',
+            }
+        };
+        var trkjs = document.createElement('img');
+        trkjs.setAttribute('src', '/cdn-cgi/images/trace/managed/js/transparent.gif?ray=77c218f32826903a');
+        trkjs.setAttribute('style', 'display: none');
+        document.body.appendChild(trkjs);
+        var cpo = document.createElement('script');
+        cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/managed/v1?ray=77c218f32826903a';
+        window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;
+        window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, -window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;
+        if (window.history && window.history.replaceState) {
+            var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;
+            history.replaceState(null, null, "\/%D0%B0%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9\/false?__cf_chl_rt_tk=Yxt4WFbSZXDmX.Ql.wzou_6bAsj9AAw4iLMVD.xfRhA-1671473452-0-gaNycGzNBz0" + window._cf_chl_opt.cOgUHash);
+            cpo.onload = function() {
+                history.replaceState(null, null, ogU);
+            };
+        }
+        document.getElementsByTagName('head')[0].appendChild(cpo);
+    }());
+</script>
+
+
+    <div class="footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="clearfix diagnostic-wrapper">
+                <div class="ray-id">Ray ID: <code>77c218f32826903a</code></div>
+            </div>
+            <div class="text-center">Performance &amp; security by <a rel="noopener noreferrer" href="https://www.cloudflare.com?utm_source=challenge&utm_campaign=m" target="_blank">Cloudflare</a></div>
+        </div>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Reverso Context</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta content="NOARCHIVE" name="GOOGLEBOT">
+    <link rel="shortcut icon" href="https://cdn.reverso.net/context/v4010/reverso-context-fav.ico" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.reverso.net/context/v4010/css/bst.style.css"/>
+    <style>
+      @font-face{font-family:'contexticons';src:url('https://cdn.reverso.net/context/v4010/fonts/contexticons.eot?uk2hvl');src:url('https://cdn.reverso.net/context/v4010/fonts/contexticons.eot?uk2hvl#iefix') format('embedded-opentype'),url('https://cdn.reverso.net/context/v4010/fonts/contexticons.ttf?uk2hvl') format('truetype'),url('https://cdn.reverso.net/context/v4010/fonts/contexticons.woff?uk2hvl') format('woff'),url('https://cdn.reverso.net/context/v4010/fonts/contexticons.svg?uk2hvl#contexticons') format('svg');font-weight: normal;font-style: normal;}
+      #error-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10vh 30px;
+        box-sizing: border-box;
+        margin: 0;
+        overflow: hidden;
+      }
+      #error-content .text {
+        height: auto;
+        box-sizing: border-box;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper" class="error">
+      <section id="top-content">
+        <a class="reverso-logo nonselectable" href="/" title="Reverso Context: the search engine for translations in context">
+          <div class="logo">
+            <span class="icon reverso-logo-red"></span>
+            <span class="icon reverso-logo-blue"></span>
+          </div>
+          <div class="text">
+            <span class="icon reverso-text"></span>
+            <span class="icon context-text"></span>
+          </div>
+        </a>
+        <div class="reverso-links">
+          <a class="translation-link" target="_blank" href="http://www.reverso.net/text_translation.aspx?lang=EN">
+            Translation
+          </a>
+          <a class="dictionary-link" target="_blank" href="http://dictionary.reverso.net">
+            Dictionary
+          </a>
+          <a class="speller-link" target="_blank" href="http://www.reverso.net/spell-checker/english-spelling-grammar/">
+            Spell Check
+          </a>
+          <a class="conjugation-link" target="_blank" href="http://conjugator.reverso.net">
+            Conjugator
+          </a>
+          <a class="grammar-link last" target="_blank" href="http://grammar.reverso.net/">
+            Grammar
+          </a>
+        </div>
+      </section>
+      <section id="error-content">
+        <p id="text-en" class="text" style="display: none">
+          You've been denied access â IP blacklisted<br>
+          Your IP <b class="ip"></b> has been considered as sending illegitimate traffic to our servers.<br>
+          If you think your traffic is legitimate, please fill in the form below so we could investigate why you were blacklisted.<br><br>
+          Thank you,<br>
+          The Reverso Team
+        </p>
+        <p id="text-fr" class="text" style="display: none">
+          Votre accÃ¨s a Ã©tÃ© bloquÃ©<br>
+          Nous avons dÃ©tectÃ© que votre adresse IP <b class="ip"></b> utilise notre service de maniÃ¨re non-conforme.<br>
+          Si vous pensez qu'il s'agit d'une erreur, merci de remplir le formulaire de contact ci-dessous et nous reviendrons vers vous rapidement.<br><br>
+          Cordialement,<br>
+          L'Ã©quipe Reverso
+        </p>
+        <iframe id="iframe-form" width="1000" height="3000" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0">Loading...</iframe>
+        <script type="text/javascript">
+          var userLang = navigator.language || navigator.userLanguage;
+          var referrer = encodeURIComponent(document.domain || document.location);
+          var error_type = "General purpose blacklist";
+          var ip = "";
+          
+          if (userLang) {
+            var code = userLang.slice(0,2);
+            switch(code) {
+              case "fr":
+                document.getElementById("text-fr").style.display = "inline-block";
+                break;
+              case "en":
+              default:
+                document.getElementById("text-en").style.display = "inline-block";
+            }
+          }
+          
+          function getIP(json) {
+            ip = json.ip;
+            var ip_array = document.getElementsByClassName("ip");
+            for(var i in ip_array) {
+              ip_array[i].innerHTML = ip;
+            }
+            if (userLang) {
+              var code = userLang.slice(0,2);
+              switch(code) {
+                case "fr":
+                  document.getElementById("text-fr").style.display = "inline-block";
+                  document.getElementById("iframe-form").src = "https://docs.google.com/forms/d/e/1FAIpQLSc1OHspxMBUkn3JIBWZ7x6_7OUhyhDYpw94ZoYBFslKeCEB6g/viewform?usp=pp_url&entry.2007143517=" + referrer + "&entry.995552299&entry.493914488=" + ip + "&entry.915325004&entry.1470696955=" + error_type;
+                  break;
+                case "en":
+                default:
+                  document.getElementById("text-en").style.display = "inline-block";
+                  document.getElementById("iframe-form").src = "https://docs.google.com/forms/d/e/1FAIpQLSfMBhGzhLBDgL5KAValyjXJT4M3OB_ERtmIfsxQ6drIZ5Zwqg/viewform?usp=pp_url&entry.2007143517=" + referrer + "&entry.995552299&entry.493914488=" + ip + "&entry.915325004&entry.1470696955=" + error_type;
+              }
+            }
+          }
+          
+          document.getElementById("iframe-form").width = window.innerWidth > 300 ? window.innerWidth.toString() : "300";
+        </script>
+        <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+      </section>
+      <p class="developers">Developed by Prompsit Language Engineering for Softissimo</p>
+      <section id="footer">
+        <p class="copy">Â© 2017 Softissimo Inc. All rights reserved.</p>
+      </section>
+    </div>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Just a moment...</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="/cdn-cgi/styles/challenges.css" rel="stylesheet">
+    
+
+</head>
+<body class="no-js">
+    <div class="main-wrapper" role="main">
+    <div class="main-content">
+        <h1 class="zone-name-title h1">
+            <img class="heading-favicon" src="/favicon.ico"
+                 onerror="this.onerror=null;this.parentNode.removeChild(this)">
+            www.babla.ru
+        </h1>
+        <h2 class="h2" id="challenge-running">
+            Checking if the site connection is secure
+        </h2>
+        <noscript>
+            <div id="challenge-error-title">
+                <div class="h2">
+                    <span class="icon-wrapper">
+                        <div class="heading-icon warning-icon"></div>
+                    </span>
+                    <span id="challenge-error-text">
+                        Enable JavaScript and cookies to continue
+                    </span>
+                </div>
+            </div>
+        </noscript>
+        <div id="trk_jschal_js" style="display:none;background-image:url('/cdn-cgi/images/trace/managed/nojs/transparent.gif?ray=77c21920c85b5ca4')"></div>
+        <div id="challenge-body-text" class="core-msg spacer">
+            www.babla.ru needs to review the security of your connection before proceeding.
+        </div>
+        <form id="challenge-form" action="/%D0%B0%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9/false?__cf_chl_f_tk=mqer5JzvHBTn_zX.BpTCGaVAJTYC5p9VutKqmZk4NzU-1671473459-0-gaNycGzNBz0" method="POST" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="md" value="Gju1At_fWg2tgPzZ.bHvX_gqKmzoegkb7fRwNNY2O0g-1671473459-0-AYM3ul-z7j-KzBMaUnLIjP8VfBaiWqcFpJ9TbGa_m7_JsWUJBFXA47gtdGnAbJmaNUXIInMwbW_paPGo6hj62JEvawsQYBfIGgwWD20wOWy-HdQE1JrdS5nBaKD3UfNXLW-MYYZBhWPejN5FHXADDuJW3XTrYfzMK_pUoYTSUCrk6OK0yk-1502i9W-lN96h3_BBSt0zN62yxsFRskjvWhEb-3GdFMe1qbZK08z4OYBX7gWYJgxNrMRQcDx1_FDdFeakjJZfQhAlqCYG-94SEV0a7ytImjQEfYjlij1sdS3jDEZQc-QBbRuWbiS-bHlH_SlTdK02POuVoLMVRYH8WJ7liJVlA9NvKC_OcobcSifZLgi6up1Fp1URSDldC4E29eXl2Omh5lqrUbq3zSB5lDnT6teTv9MM76l1QLm-KywYxnPJO10s_5wcr3fXxlUawySnaZzN_KJml9eKSLnOXmDCU1lPCZYL-QgGMVBofiYD49_gjU9PsMEm-mWpAy0d9lQF4--gFKQI7bu5-0OmdGWcsM_XwV5mfWfzL1t5daikqt_gI6t2eTAXTZnRmZmkzI0DTU0kr80eZ0PvdtQhARrvFY7QY8lMxMGX-QqeF_f19by0aPEsm8eGilaOTDmyYk_HwaMUT3AE-7E1umZPkxFSH1mL9puWj_Sn-Dl6E7rqAfGIsvNsV9d4T61xqCS6zCuj5qWV5EtRuDJ1PV5Qih-hl0-0c6-2npsPFk_iyZtQm46egmFi_MqhSuU1e0UOqMud8iTDn4tf1I7tEe_XS7Cj77RggnCKFSP1WvMkFt_J3ko1Pxqs9YmypNwK2iH1ik67ZErpzX6REAQch-g9fDoOXEwaVKBXv_hUNaxrFQTkKuaVn7duiOhlQ7wgIgjGZ1TGKy2-dp8CXQPHRZGrgEuJsiYtMyPPy1KKrwxznyLxY4vl2zdfr0ARHuPzN-tkccyaulJiEjv7JJOmyzvTI5Kbc-3UPmb6Mbh5yGP6lL--">
+            <input type="hidden" name="r" value="BCLBhRIhjpsd7SAjQD.dkaao5MuNldOYiaRL7odlbJY-1671473459-0-AYGxFnqA+HBBG24M0dpAiEM0/OUbI4mSI9+WQDHqCdqRC4UPQ+oCW6w4z0xobHsVU3BTEyKXfo3h0ZiVqlQkSEHCEZTlqUJvmszLewIOtKXv332uIfLv79+H7vRDbTF1BO1KsXI5ce5ijH9kyJRxDN3mS32WTImChTypePnj+eVBWxxSnMuuVwqHdJxhxTr/AUGRaEKVizYv0Zpt2mliNg5lNc4IHrr5eiBD0RgeDahPF1ooBJR6bD0N0qGopNxb8fpJkg24Hq8Lo9Luhzo09mrFA7lNPskY00Co3qR1cnuwsszHieh89gqvs9Ag+EurYwCCllHlsEqXEeJRTLkqx5ZgsQz/ruqSyCJczpVN8p2PmkgEKTzz7xWFMF5bkQPaZaWHZ1KjLxu/2+sOa1ln1nWwIe4+HQVRmeHDQIHcybKsuYDPZ8JHTFf+NDoDe9PJp0Yexij80bspErKv1myMe7C22x/HfpmjhaQkIun7Tyu+mB9JKCggozgytxSNCCJQpZ6uBg+QzEs8Pw5VubRoLoYjSC8qO85ElsArJ5U0gU8J2SEzs+dK404d+9IudshtCW2QwltFmAIHLdtJAnNuvNRPOUbVmAV2BFd1S6j/IGuj3CHo6RFaBW9q1VjmYNhQrtb1LdZjwVFoWWb6RQfVyogmPfqsL9ycWRhL4s0Oy2odA7CrC3MCNEG+RdoHfnqKYdzczJikdsyJzinwrDxaCGaTkty6xv732lqF816vfj9Qf1vfXLXoHetYXUVc4onfICwb2txLacD43CQKi+uXVTAzqx7KZdSLc75RKAEn0lMAfCMiB5FTWZxc6GWK7nYYc9lpcF2yPS1dz9lw1gAOFrVYRzOEPE4A8Rvbf8htWtZLGLbfoW2IOWs2V3LmSEb3E34XtjhoUaHOYgOWcVFnNqRbziDbc2sOwULsymGACw6FrP51GSLItvOpcQehd7BaoRRdLI7e1STDNe62w1hGFWEC5ZFAR3JeWVNDUqqaZYltfLxzxh8jBGRS0OhFPKYUksCnirXrQwY8pOX8hEJZax+ddi7B3EHB4Zw9+uozNYYDizUpz8SGfW57PUQEqohO0+xabM6YUiTlVADxKmNJ9BMW0zTgbwvLJV+lO8GRZ7YY7JS2mdI0+oitqMGUK3pN5pxiiTS6UpBiIJZuTw7vtp0/rgkCXUY89fUs4QHITB8emeLJ6dschebSs90edFEz7+YtG8D1ojNj9QUH4akKgkRnZgy8jJp/2a2qDQ7Y1ShMe+xHMLM/8WakQTllynNuY8sxXj37INq8SgFomux1WLH1OspeY7swcxGr48Jnr9H/yxG7ebQikhKHdluaxDTMtsMrw3M1D7/AzohfVS+ogtvY72jtgsl63EpL0YzdteKMZd89CAOXmCHAkCa+NMikN+GUQHtk+SNMn7eLfFeG1Cjy6ICoQHpytT/B7N1af+JVZLVH3xr+uZoZAaGJ0sruJI2DglqBNRROVpwM28EEMgJMmBiKqisSiFe0B5f5lJOqiPDpT32NgwTmhIXlDSY1t278S0VALPscmYcVXXiVK7N2Jn2DUivnBL5gT5NcU79iFyo4ax+yuCxMDdV9EwD0dvx3nXNB01bQOSfCxfK/T3hmY/LBZIGFyZu5Ji1ODRdae/NdwRQ8XKZEB6/yFnXxUCWyR8B8z/+R6dpNZ8PE9NOcrUo6o+ViNJ7BhsDLl3Tkx9isY8O54gw196W2j5OZQHzasm1DzN3B/n8XhQpBEAEKQ+897vtb5SCLyCj9aKSFUuSsfoHRxQjioMDYROUVAQ==">
+        </form>
+    </div>
+</div>
+<script>
+    (function(){
+        window._cf_chl_opt={
+            cvId: '2',
+            cType: 'managed',
+            cNounce: '68329',
+            cRay: '77c21920c85b5ca4',
+            cHash: '0734327fdd6b7a6',
+            cUPMDTk: "\/%D0%B0%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9\/false?__cf_chl_tk=mqer5JzvHBTn_zX.BpTCGaVAJTYC5p9VutKqmZk4NzU-1671473459-0-gaNycGzNBz0",
+            cFPWv: 'g',
+            cTTimeMs: '1000',
+            cTplV: 4,
+            cTplB: 'cf',
+            cRq: {
+                ru: 'aHR0cHM6Ly93d3cuYmFibGEucnUvJUQwJUIwJUQwJUJEJUQwJUIzJUQwJUJCJUQwJUI4JUQwJUI5JUQxJTgxJUQwJUJBJUQwJUI4JUQwJUI5LSVEMSU4MCVEMSU4MyVEMSU4MSVEMSU4MSVEMCVCQSVEMCVCOCVEMCVCOS9mYWxzZQ==',
+                ra: 'cHl0aG9uLXJlcXVlc3RzLzIuMjUuMQ==',
+                rm: 'R0VU',
+                d: 'H/AW4LhWme9aKsSjtYGT995sv/EZHwdLtHofKWSBoESezIOf19qP1UvJz648gM5H5i1HUVXEw9oAE+WnUwQ0d0u7IyhkJhg1EMFiZ/ydDEVFIROJVdNibdy1xbW4udfgFIFoukIxXtkSB2PlzxuYxvScsQ21ZvcufPc3ElDkFlr2pPm8Gv8gbgmG16LukFK6x8IlC30D/4r3PZbSxr+ut1ymtZrd8+GPPi0F91tz22REzxKAp224ejg6BL23v9XTtG+3VPFm0ihPTjnnlYgb+qPBp79jzFJRMXkiNuVzskqggbYp8sDo126rbAcQH3QcJYRk0PPbsoLu1Mu1Kf4wQWSvs5sHHVkYAo6ACH4S3/74UPn2hzpVj8geRJfPpajdgZT63hR1Ar8TX8RbPbIEavsFK0mm3bsaRhP5VnclXrmiDiE3zqErHb6Jepmv2ReQHFDEU985GaeY6mI/zcg4qXlZ/QaZIVux75w6Z7DueBmJRYVPV2eiIpKx+9dE4vvh777wy87Fa0/9l+6WOx1gkrdgz4L3PRqzcE/1m3h95g1kGPR3GzC04qWPh7769K6EtMv1huTEYIWBXw5hA3qvunUN+FnUKJCXCa/+hglvu29JSB1eHgRFecC0G6/FYDrZm8Gb4V8USe8/N86nM/tpsxeLMaDMVIQiRqsViSA+4VzHj4oMQng9084zBxHQEw82',
+                t: 'MTY3MTQ3MzQ1OS4zMzcwMDA=',
+                m: 'lSZW9y4DnCsLUr1tK4oIIKRfw3TD4G5nCLnZ8CTMQeQ=',
+                i1: 'WESeuRyqtgce7kw67jIbGw==',
+                i2: 'vjQbQuOROCad8kvCwB63Iw==',
+                zh: 'EvUXdB6I8dh0h0oBYhEayTFsJx5mz0Zl5ou1TaMGu8I=',
+                uh: '5GU+jYv2xJ+bCaE/ARmi/DORbiS/v56CW7E0TH4XWQk=',
+                hh: 'ZeniGxijZjtyOC+ReJ9UzMckMymxR9XxQJH749/TurE=',
+            }
+        };
+        var trkjs = document.createElement('img');
+        trkjs.setAttribute('src', '/cdn-cgi/images/trace/managed/js/transparent.gif?ray=77c21920c85b5ca4');
+        trkjs.setAttribute('style', 'display: none');
+        document.body.appendChild(trkjs);
+        var cpo = document.createElement('script');
+        cpo.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/managed/v1?ray=77c21920c85b5ca4';
+        window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;
+        window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, -window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;
+        if (window.history && window.history.replaceState) {
+            var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;
+            history.replaceState(null, null, "\/%D0%B0%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9\/false?__cf_chl_rt_tk=mqer5JzvHBTn_zX.BpTCGaVAJTYC5p9VutKqmZk4NzU-1671473459-0-gaNycGzNBz0" + window._cf_chl_opt.cOgUHash);
+            cpo.onload = function() {
+                history.replaceState(null, null, ogU);
+            };
+        }
+        document.getElementsByTagName('head')[0].appendChild(cpo);
+    }());
+</script>
+
+
+    <div class="footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="clearfix diagnostic-wrapper">
+                <div class="ray-id">Ray ID: <code>77c21920c85b5ca4</code></div>
+            </div>
+            <div class="text-center">Performance &amp; security by <a rel="noopener noreferrer" href="https://www.cloudflare.com?utm_source=challenge&utm_campaign=m" target="_blank">Cloudflare</a></div>
+        </div>
+    </div>
+</body>
+</html>

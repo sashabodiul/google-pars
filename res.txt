@@ -1,0 +1,4 @@
+https://github.com : 
+GitHub - Delgan/loguru: Python logging made (stupidly) simple
+https://github.com : 
+GitHub - Delgan/loguru: Python logging made (stupidly) simple
